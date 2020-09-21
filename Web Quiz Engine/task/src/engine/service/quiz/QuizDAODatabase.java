@@ -29,7 +29,7 @@ public class QuizDAODatabase implements QuizDao {
     public QuizEntity addQuiz(QuizEntity quizEntity) {
         return quizRepository.save(quizEntity);
     }
-z
+
     @Override
     public QuizEntity getById(long id) throws NoSuchQuizException {
         return quizRepository.findById(id).orElseThrow(NoSuchQuizException::new);
