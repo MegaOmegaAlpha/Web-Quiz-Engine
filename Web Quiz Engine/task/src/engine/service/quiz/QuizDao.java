@@ -20,7 +20,7 @@ public interface QuizDao {
 
     void removeById(long id) throws NoSuchQuizException;
 
-    Page<QuizEntity> getAllWithPagination(Pageable pageable, UserDTO userDTO);
+    Page<QuizEntity> getAllWithPagination(Pageable pageable);
 
     Page<CompletedQuizData> getAllCompleted(Pageable pageable, UserDTO userDTO);
 

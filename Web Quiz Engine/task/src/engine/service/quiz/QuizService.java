@@ -84,8 +84,8 @@ public class QuizService {
         return quizResult;
     }
 
-    public Page<QuizDTO> getAllQuizzesWithPagination(Pageable pageable, UserDTO userDTO) {
-        return quizDao.getAllWithPagination(pageable, userDTO).map(this::convertEntityToDTO);
+    public Page<QuizDTO> getAllQuizzesWithPagination(Pageable pageable) {
+        return quizDao.getAllWithPagination(pageable).map(this::convertEntityToDTO);
     }
 
     public Page<CompletedQuizData> getAllQuizzesCompleted(Pageable pageable, UserDTO userDTO) {

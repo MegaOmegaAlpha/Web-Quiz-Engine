@@ -50,8 +50,8 @@ public class QuizDAODatabase implements QuizDao {
     }
 
     @Override
-    public Page<QuizEntity> getAllWithPagination(Pageable pageable, UserDTO userDTO) {
-        return quizRepository.findAllByUser(userDTO.getEmail(), pageable);
+    public Page<QuizEntity> getAllWithPagination(Pageable pageable) {
+        return quizRepository.findAll(pageable);
     }
 
     @Override

@@ -50,9 +50,8 @@ public class QuizController {
     @RequestMapping(value = "/quizzes", method = RequestMethod.GET)
     public Page<QuizDTO> getAllQuizzes(@RequestParam(defaultValue = "0") int page,
                                        @RequestParam(defaultValue = "10") int pageSize) {
-        UserDTO user = (UserDTO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Pageable pageable = PageRequest.of(page, pageSize);
-        return quizService.getAllQuizzesWithPagination(pageable, user);
+        return quizService.getAllQuizzesWithPagination(pageable);
     }
 
     @RequestMapping(value = "/quizzes/completed")
