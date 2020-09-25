@@ -22,7 +22,7 @@ public interface QuizDao {
 
     Page<QuizEntity> getAllWithPagination(Pageable pageable);
 
-    Page<CompletedQuizData> getAllCompleted(Pageable pageable, UserDTO userDTO);
+    Page<CompletedQuizData> getAllCompletedWithPagination(Pageable pageable, UserDTO userDTO);
 
     void saveCompletionDate(CompletedQuizData completedQuizData);
 }

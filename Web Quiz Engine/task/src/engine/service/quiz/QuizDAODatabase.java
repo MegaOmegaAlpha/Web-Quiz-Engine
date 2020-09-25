@@ -55,7 +55,7 @@ public class QuizDAODatabase implements QuizDao {
     }
 
     @Override
-    public Page<CompletedQuizData> getAllCompleted(Pageable pageable, UserDTO userDTO) {
+    public Page<CompletedQuizData> getAllCompletedWithPagination(Pageable pageable, UserDTO userDTO) {
         return completedQuizRepository.findAllByQuizUser(userDTO.getEmail(), pageable);
     }
 

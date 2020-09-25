@@ -10,10 +10,8 @@ import java.util.Date;
 public class CompletedQuizData {
 
     @Id
+    @Column(name = "completed_at")
     private Date completedAt;
-
-    @Column
-    private long completedQuizId;
 
     @ManyToOne
     @JoinColumn(name = "quiz_id", nullable = false)
@@ -21,7 +19,6 @@ public class CompletedQuizData {
 
     public CompletedQuizData(Date completedAt, long completedQuizId, QuizEntity quizEntity) {
         this.completedAt = completedAt;
-        this.completedQuizId = completedQuizId;
         this.quizEntity = quizEntity;
     }
 
@@ -44,11 +41,4 @@ public class CompletedQuizData {
         this.quizEntity = quizEntity;
     }
 
-    public long getCompletedQuizId() {
-        return completedQuizId;
-    }
-
-    public void setCompletedQuizId(long completedQuizId) {
-        this.completedQuizId = completedQuizId;
-    }
 }

@@ -1,5 +1,6 @@
 package engine.controllers;
 
+import engine.dto.quiz.CompletedQuizDTO;
 import engine.dto.quiz.QuizAnswer;
 import engine.dto.quiz.QuizDTO;
 import engine.dto.quiz.QuizResult;
@@ -55,11 +56,11 @@ public class QuizController {
     }
 
     @RequestMapping(value = "/quizzes/completed")
-    public Page<CompletedQuizData> getAllQuizzesCompleted(@RequestParam(defaultValue = "0") int page,
-                                                          @RequestParam(defaultValue = "10") int pageSize) {
+    public Page<CompletedQuizDTO> getAllQuizzesCompleted(@RequestParam(defaultValue = "0") int page,
+                                                         @RequestParam(defaultValue = "10") int pageSize) {
         UserDTO user = (UserDTO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Pageable pageable = PageRequest.of(page, pageSize);
-        return quizService.getAllQuizzesCompleted(pageable, user);
+        return quizService.getAllQuizzesCompletedWithPagination(pageable, user);
     }
 
     @RequestMapping(value = "/quizzes/{id}/solve", method = RequestMethod.POST)

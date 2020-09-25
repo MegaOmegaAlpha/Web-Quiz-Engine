@@ -1,5 +1,6 @@
 package engine.service.quiz;
 
+import engine.dto.quiz.CompletedQuizDTO;
 import engine.dto.quiz.QuizAnswer;
 import engine.dto.quiz.QuizDTO;
 import engine.dto.quiz.QuizResult;
@@ -61,6 +62,11 @@ public class QuizService {
         return modelMapper.map(quizDTO, QuizEntity.class);
     }
 
+    public CompletedQuizDTO convertCompletedQuizToDTO(CompletedQuizData completedQuizData) {
+        return new CompletedQuizDTO(completedQuizData.getQuizEntity().getId(),
+                completedQuizData.getCompletedAt());
+    }
+
     public QuizResult solve(QuizAnswer answer, long quizId) throws NoSuchQuizException {
         return solve(answer, getById(quizId));
     }
@@ -75,7 +81,7 @@ public class QuizService {
         if (answerOptionsList.equals(quizOptionsList)) {
             CompletedQuizData completedQuiz = new CompletedQuizData();
             completedQuiz.setCompletedAt(new Date(System.currentTimeMillis()));
-            completedQuiz.setCompletedQuizId(quizEntity.getId());
+            completedQuiz.setQuizEntity(quizEntity);
             quizDao.saveCompletionDate(completedQuiz);
             quizResult = QuizResult.getSuccessResult();
         } else {
@@ -88,8 +94,8 @@ public class QuizService {
         return quizDao.getAllWithPagination(pageable).map(this::convertEntityToDTO);
     }
 
-    public Page<CompletedQuizData> getAllQuizzesCompleted(Pageable pageable, UserDTO userDTO) {
-        return quizDao.getAllCompleted(pageable, userDTO);
+    public Page<CompletedQuizDTO> getAllQuizzesCompletedWithPagination(Pageable pageable, UserDTO userDTO) {
+        return quizDao.getAllCompletedWithPagination(pageable, userDTO).map(this::convertCompletedQuizToDTO);
     }
 
 }
